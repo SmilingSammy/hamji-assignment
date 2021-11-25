@@ -25,12 +25,16 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Question
     template_name = "polls/detail.html"
-
+    def detail_view(request, pk):
+        question = get_object_or_404(Question, pk=pk)
+        return render(request, "polls/detail.html", {'question': question})
 
 class ResultsView(generic.DetailView):
     model = Question
     template_name = "polls/results.html"
-
+    def results_view(request, pk):
+        question = get_object_or_404(Question, pk=pk)
+        return render(request, "polls/results.html", {'question': question})
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
