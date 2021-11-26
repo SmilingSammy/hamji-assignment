@@ -36,7 +36,7 @@ python manage.py runserver
          - Use Django signal/receiver system
 8.  [x] In `/polls/`, fetch only 5 questions through REST API
 9.  [x] Handle race condition on handling "vote" action
-10. [ ] Implement login system
+10. [x] Implement login system
 11. [ ] Implement system that a question creator can approve suggested choices
 12. [ ] Implement global search for questions and choices
 

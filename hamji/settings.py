@@ -143,5 +143,6 @@ REST_FRAMEWORK = {
 }
 
 
-# login auto move URL
+# login/out auto move URL
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
