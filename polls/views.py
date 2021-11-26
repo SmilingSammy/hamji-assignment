@@ -1,4 +1,5 @@
 import requests
+from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -12,15 +13,27 @@ from .models import Choice, Question
 from .serializers import QuestionSerializer
 
 
-class IndexView(generic.ListView):
-    template_name = "polls/index.html"
-    context_object_name = "latest_question_list"
+# class IndexView(generic.ListView):
+#     template_name = "polls/index.html"
+#     context_object_name = "latest_question_list"
+#     def get_queryset(self):
+#         """Return the last five published questions."""
+#         response = requests.get(restify("/questions/"))
+#         questions = response.json()
+#
+#         return questions[:5]
 
-    def get_queryset(self):
-        """Return the last five published questions."""
-        response = requests.get(restify("/questions/"))
-        questions = response.json()
-        return questions[:5]
+def index(request):
+    # input parameter
+    page = request.GET.get('page', '1')  # page
+    # select
+    latest_question_list = Question.objects.order_by('-pub_date')
+    # paging
+    paginator = Paginator(latest_question_list, 5)  # show 5 question per page
+    page_obj = paginator.get_page(page)
+
+    context = {'latest_question_list': page_obj}
+    return render(request, "polls/index.html", context)
 
 
 class DetailView(generic.DetailView):
@@ -31,9 +44,7 @@ class DetailView(generic.DetailView):
 class ResultsView(generic.DetailView):
     model = Question
     template_name = "polls/results.html"
-    def results_view(request, pk):
-        question = get_object_or_404(Question, pk=pk)
-        return render(request, "polls/results.html", {'question': question})
+
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
