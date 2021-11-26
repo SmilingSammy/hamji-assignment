@@ -2,7 +2,7 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
-
+from django.contrib.auth.models import User
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
@@ -22,3 +22,10 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    create_date = models.DateTimeField()
+    modify_date = models.DateTimeField(null=True, blank=True)
+    question = models.ForeignKey(Question, null=True, blank=True, on_delete=models.CASCADE)

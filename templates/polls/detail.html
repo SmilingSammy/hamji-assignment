@@ -11,5 +11,31 @@
     {% endfor %}
 </fieldset>
 <input type="submit" value="Vote">
+<!-- Comment on Question Start -->
+{% if question.comment_set.count > 0 %}
+<div class="mt-3">
+{% for comment in question.comment_set.all %}
+    <div class="comment py-2 text-muted">
+        <span style="white-space: pre-line;">{{ comment.content }}</span>
+        <span>
+            - {{ comment.author }}, {{ comment.create_date }}
+            {% if comment.modify_date %}
+            (Revise:{{ comment.modify_date }})
+            {% endif %}
+        </span>
+        {% if request.user == comment.author %}
+        <a href="{% url 'polls:comment_modify_question' comment.id  %}" class="small">Revise</a>,
+        <a href="#" class="small delete"
+           data-uri="{% url 'polls:comment_delete_question' comment.id  %}">Delete</a>
+        {% endif %}
+    </div>
+{% endfor %}
+</div>
+{% endif %}
+<div>
+    <a href="{% url 'polls:comment_create_question' question.id  %}"
+       class="small"><small>Add Comment ..</small></a>
+</div>
+<!-- Comment on Question End -->
 </form>
 {% endblock %}
