@@ -26,7 +26,7 @@ python manage.py runserver
 
 ## TODO
 1.  [x] Raise 404 if no matching question
-2.  [ ] Show only questions that are published and not yet closed
+2.  [x] Show only questions that are published and not yet closed
 3.  [ ] Enable to comment on question
 4.  [ ] Enable to comment on comment
 5.  [ ] Enable to suggest new choice for question
@@ -35,7 +35,7 @@ python manage.py runserver
      - Requirements:
          - Use Django signal/receiver system
 8.  [ ] In `/polls/`, fetch only 5 questions through REST API
-9.  [ ] Handle race condition on handling "vote" action
+9.  [x] Handle race condition on handling "vote" action
 10. [ ] Implement login system
 11. [ ] Implement system that a question creator can approve suggested choices
 12. [ ] Implement global search for questions and choices

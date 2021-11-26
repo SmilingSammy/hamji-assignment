@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 from rest_framework import viewsets
+from django.db.models import F
 
 from utils.url import restify
 
@@ -25,9 +26,7 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Question
     template_name = "polls/detail.html"
-    def detail_view(request, pk):
-        question = get_object_or_404(Question, pk=pk)
-        return render(request, "polls/detail.html", {'question': question})
+
 
 class ResultsView(generic.DetailView):
     model = Question
@@ -51,7 +50,10 @@ def vote(request, question_id):
             },
         )
     else:
-        selected_choice.votes += 1
+        # selected_choice.votes += 1
+        # [9] Handle race condition on handling "vote" action
+        selected_choice.votes += F('votes') + 1
+
         selected_choice.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
