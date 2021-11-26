@@ -17,18 +17,18 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 
-import polls.views
+from polls.views import base_views
 
 from . import views
 
 router = routers.DefaultRouter()
 router.register(r"users", views.UserViewSet)
-router.register(r"questions", polls.views.QuestionViewSet)
+router.register(r"questions", base_views.QuestionViewSet)
 
 urlpatterns = [
     path("_api/", include(router.urls)),
     path("polls/", include("polls.urls")),
     path("common/", include("common.urls")),
     path("admin/", admin.site.urls),
-    path("", polls.views.index, name='index'),
+    path("", base_views.index, name='index'),
 ]
