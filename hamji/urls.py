@@ -28,5 +28,7 @@ router.register(r"questions", polls.views.QuestionViewSet)
 urlpatterns = [
     path("_api/", include(router.urls)),
     path("polls/", include("polls.urls")),
+    path("common/", include("common.urls")),
     path("admin/", admin.site.urls),
+    path("", polls.views.index, name='index'),
 ]
