@@ -36,14 +36,29 @@ def index(request):
     return render(request, "polls/index.html", context)
 
 
-class DetailView(generic.DetailView):
-    model = Question
-    template_name = "polls/detail.html"
+# class DetailView(generic.DetailView):
+#     model = Question
+#     template_name = "polls/detail.html"
 
+def detail(request, question_id):
+    """
+    pybo 내용 출력
+    """
+    question = get_object_or_404(Question, pk=question_id)
+    context = {'question': question}
+    return render(request, 'polls/detail.html', context)
 
-class ResultsView(generic.DetailView):
-    model = Question
-    template_name = "polls/results.html"
+# class ResultsView(generic.DetailView):
+#     model = Question
+#     template_name = "polls/results.html"
+
+def result(request, question_id):
+    """
+    pybo 내용 출력
+    """
+    question = get_object_or_404(Question, pk=question_id)
+    context = {'question': question}
+    return render(request, "polls/results.html", context)
 
 
 def vote(request, question_id):

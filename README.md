@@ -26,7 +26,7 @@ python manage.py runserver
 
 ## TODO
 1.  [x] Raise 404 if no matching question
-2.  [x] Show only questions that are published and not yet closed
+2.  [ ] Show only questions that are published and not yet closed
 3.  [ ] Enable to comment on question
 4.  [ ] Enable to comment on comment
 5.  [ ] Enable to suggest new choice for question
