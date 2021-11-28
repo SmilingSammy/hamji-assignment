@@ -36,14 +36,14 @@ class IndexView(generic.ListView):
 #     context = {'latest_question_list': page_obj}
 #     return render(request, "polls/index.html", context)
 
-def detail(request, question_id):
-    """
-    poll print question detail
-    """
-    question = get_object_or_404(Question, pk=question_id)
-    # question = get_object_or_404(Question.objects.filter(pub_date__lte=timezone.now()), pk=question_id)
-    context = {'question': question}
-    return render(request, 'polls/detail.html', context)
+# def detail(request, question_id):
+#     """
+#     poll print question detail
+#     """
+#     question = get_object_or_404(Question, pk=question_id)
+#     # question = get_object_or_404(Question.objects.filter(pub_date__lte=timezone.now()), pk=question_id)
+#     context = {'question': question}
+#     return render(request, 'polls/detail.html', context)
 
 class DetailView(generic.DetailView):
     model = Question
