@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
+
 from ..forms import CommentForm
 from ..models import Question, Comment
 
@@ -63,3 +64,34 @@ def comment_delete_question(request, comment_id):
     else:
         comment.delete()
     return redirect('polls:detail', question_id=comment.question_id)
+
+
+# def post_detail(request, slug):
+#     post = Post.objects.get(slug=slug)
+#     if request.method == 'POST':
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             reply_obj = None
+#             try:
+#                 reply_id = int(request.POST.get('reply_id'))
+#             except:
+#                 reply_id = None
+#             if reply_id:
+#                 reply_obj = Comment.objects.get(id=reply_id)
+#
+#             author = form.cleaned_data['author']
+#             comment = form.cleaned_data['comment']
+#             if reply_obj:
+#                Comment(author=author,comment_field=comment, reply=reply_obj, post=post).save()
+#             else:
+#                 Comment(author=author,comment_field=comment, post=post).save()
+#             return redirect(reverse('post_detail', args=[post.slug]))
+#     else:
+#         form = CommentForm()
+#     comments = Comment.objects.filter(post=post, reply=None).order_by('-create_date')
+#     context = {
+#         'post':post,
+#         'form':form,
+#         'comments':comments
+#     }
+#     return render(request, 'post_detail.html', context)

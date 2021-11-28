@@ -30,5 +30,6 @@ urlpatterns = [
     path("polls/", include("polls.urls")),
     path("common/", include("common.urls")),
     path("admin/", admin.site.urls),
-    path("", base_views.index, name='index'),
+    # path("", base_views.index, name='index'),
 ]
+
