@@ -63,6 +63,7 @@ def comment_delete_question(request, comment_id):
         return redirect('polls:detail', question_id=comment.question_id)
     else:
         comment.delete()
+        messages.success(request, 'Delete comment success')
     return redirect('polls:detail', question_id=comment.question_id)
 
 

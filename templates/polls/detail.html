@@ -25,8 +25,8 @@
         </span>
         {% if request.user == comment.author %}
         <a href="{% url 'polls:comment_modify_question' comment.id  %}" class="small">Revise</a>,
-        <a href="#" class="small delete"
-           data-uri="{% url 'polls:comment_delete_question' comment.id  %}">Delete</a>
+        <a href="{% url 'polls:comment_delete_question' comment.id  %}" class="small delete">Delete</a>
+
         {% endif %}
     </div>
 {% endfor %}
