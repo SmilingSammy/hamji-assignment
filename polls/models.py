@@ -36,8 +36,18 @@ class Comment(models.Model):
     modify_date = models.DateTimeField(null=True, blank=True)
     question = models.ForeignKey(Question, null=True, blank=True, on_delete=models.CASCADE)
 
-    # post = models.ForeignKey('Post', on_delete=models.CASCADE)
-    # reply = models.ForeignKey('Comment', on_delete=models.CASCADE, related_name="replies", null=True)
-    #
-    # def __str__(self):
-    #     return self.author
+
+class Post(models.Model):
+    title = models.CharField(max_length=50)
+    text = models.TextField()
+
+    def __str__(self):
+        return self.text
+
+
+class Reply(models.Model):
+    create_date = models.DateTimeField(auto_now_add=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    content = models.TextField(max_length=1000)
+    # reples = models.ForeignKey('Comment', on_delete=models.CASCADE, related_name="replies", null=True)
+

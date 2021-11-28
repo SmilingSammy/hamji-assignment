@@ -67,6 +67,7 @@ def comment_delete_question(request, comment_id):
     return redirect('polls:detail', question_id=comment.question_id)
 
 
+
 # def post_detail(request, slug):
 #     post = Post.objects.get(slug=slug)
 #     if request.method == 'POST':

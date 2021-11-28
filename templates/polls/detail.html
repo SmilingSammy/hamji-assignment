@@ -20,15 +20,30 @@
         <span>
             - {{ comment.author }}, {{ comment.create_date }}
             {% if comment.modify_date %}
-            (Revise:{{ comment.modify_date }})
+                (Revise:{{ comment.modify_date }})
             {% endif %}
         </span>
         {% if request.user == comment.author %}
-        <a href="{% url 'polls:comment_modify_question' comment.id  %}" class="small">Revise</a>,
-        <a href="{% url 'polls:comment_delete_question' comment.id  %}" class="small delete">Delete</a>
-
+            <a href="{% url 'polls:comment_modify_question' comment.id  %}" class="small">Revise</a>,
+            <a href="{% url 'polls:comment_delete_question' comment.id  %}" class="small delete">Delete</a>
         {% endif %}
     </div>
+    <!-- reply start -->
+    {% for reply in comment.replies.all %}
+        <div class="comment py-3 text-muted">
+            <span>
+                - {{ reply.author }}, {{ reply.create_date }}
+                {% if reply.modify_date %}
+                    (Revise:{{ reply.modify_date }})
+                {% endif %}
+            </span>
+            {% if request.user == reply.author %}
+                <a href="{% url 'polls:comment_modify_question' reply.id  %}" class="small">Revise</a>,
+                <a href="{% url 'polls:comment_delete_question' reply.id  %}" class="small delete">Delete</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <!-- reply end -->
 {% endfor %}
 </div>
 {% endif %}
